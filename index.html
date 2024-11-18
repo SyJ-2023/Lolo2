@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Copiar Alias Automático</title>
+  <title>Copiar Alias</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -57,29 +57,19 @@
       font-size: 18px;
       margin-top: 20px;
     }
-
-    .hidden {
-      display: none;
-    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Escanea el QR para copiar el alias</h1>
+    <h1>Copiar el alias</h1>
+    <p id="alias">Alias: Matiach.lolo</p>
+    <button class="button" id="copyButton" onclick="copiarAlias()">Copiar Alias</button>
     <p id="message" class="message"></p>
-    <div id="alias-container">
-      <p id="alias">Alias: Matiach.lolo</p>
-      <button class="button" id="continueButton" onclick="intentarCopiarAutomaticamente()">Continuar</button>
-      <button class="button hidden" id="copyButton" onclick="copiarAlias()">Copiar Alias</button>
-    </div>
   </div>
 
   <script>
     const alias = "Matiach.lolo";
     const messageElement = document.getElementById("message");
-    const aliasContainer = document.getElementById("alias-container");
-    const continueButton = document.getElementById("continueButton");
-    const copyButton = document.getElementById("copyButton");
 
     function copiarAlias() {
       const input = document.createElement("input");
@@ -100,34 +90,6 @@
         messageElement.classList.add("error");
       }
       messageElement.style.display = "block";
-    }
-
-    function intentarCopiarAutomaticamente() {
-      // Intentar copiar el alias automáticamente
-      const input = document.createElement("input");
-      input.value = alias;
-      document.body.appendChild(input);
-      input.select();
-      input.setSelectionRange(0, 99999); // Para dispositivos móviles
-      const success = document.execCommand("copy");
-      document.body.removeChild(input);
-
-      if (success) {
-        // Si se copió correctamente, mostrar el mensaje de éxito y ocultar el botón de continuar
-        messageElement.textContent = "Alias copiado automáticamente.";
-        messageElement.classList.remove("error");
-        messageElement.classList.add("message");
-        messageElement.style.display = "block";
-        continueButton.classList.add("hidden");
-        copyButton.classList.remove("hidden");
-      } else {
-        // Si no se pudo copiar automáticamente, mostrar el mensaje de error y el botón de copiar manual
-        messageElement.textContent = "No se pudo copiar el alias automáticamente.";
-        messageElement.classList.remove("message");
-        messageElement.classList.add("error");
-        messageElement.style.display = "block";
-        copyButton.classList.remove("hidden");
-      }
     }
   </script>
 </body>
