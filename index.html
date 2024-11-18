@@ -3,15 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pagar a Matíasch.lolo</title>
+  <title>Alias Copiado</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      text-align: center;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .message {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+    .alias {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 15px 0;
+      padding: 10px;
+      background-color: #e0e0e0;
+      border-radius: 4px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
-  <h1>Pagar a Matíasch.lolo</h1>
-  <p>Seleccioná tu billetera para realizar el pago al alias:</p>
-  <p><strong>Matíasch.lolo</strong></p>
-  <a href="https://link.mercadopago.com.ar/pay?alias=Matíasch.lolo">
-    Abrir en Mercado Pago
-  </a>
-  <p>Si tu billetera no aparece, copiá manualmente el alias: <strong>Matíasch.lolo</strong></p>
+  <div class="container">
+    <p class="message">Alias copiado y listo</p>
+    <p class="message">El alias ha sido copiado automáticamente, ahora podés pegarlo en tu billetera virtual.</p>
+    <div class="alias" id="alias">Matíasch.lolo</div>
+  </div>
+
+  <script>
+    window.onload = function() {
+      const aliasText = document.getElementById('alias');
+      const range = document.createRange();
+      range.selectNode(aliasText);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+      try {
+        document.execCommand('copy'); // Intenta copiar el alias automáticamente
+        alert('Alias copiado automáticamente');
+      } catch (err) {
+        alert('No se pudo copiar el alias automáticamente. Por favor, copialo manualmente.');
+      }
+    }
+  </script>
 </body>
 </html>
