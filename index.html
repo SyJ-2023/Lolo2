@@ -57,6 +57,10 @@
       font-size: 18px;
       margin-top: 20px;
     }
+
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -65,7 +69,8 @@
     <p id="message" class="message"></p>
     <div id="alias-container">
       <p id="alias">Alias: Matiach.lolo</p>
-      <button class="button" id="copyButton" style="display:none;" onclick="copiarAlias()">Copiar Alias</button>
+      <button class="button" id="continueButton" onclick="intentarCopiarAutomaticamente()">Continuar</button>
+      <button class="button hidden" id="copyButton" onclick="copiarAlias()">Copiar Alias</button>
     </div>
   </div>
 
@@ -73,6 +78,7 @@
     const alias = "Matiach.lolo";
     const messageElement = document.getElementById("message");
     const aliasContainer = document.getElementById("alias-container");
+    const continueButton = document.getElementById("continueButton");
     const copyButton = document.getElementById("copyButton");
 
     function copiarAlias() {
@@ -96,8 +102,8 @@
       messageElement.style.display = "block";
     }
 
-    // Intentar copiar el alias automáticamente
     function intentarCopiarAutomaticamente() {
+      // Intentar copiar el alias automáticamente
       const input = document.createElement("input");
       input.value = alias;
       document.body.appendChild(input);
@@ -107,25 +113,22 @@
       document.body.removeChild(input);
 
       if (success) {
-        // Si se copió correctamente, mostrar el mensaje de éxito
+        // Si se copió correctamente, mostrar el mensaje de éxito y ocultar el botón de continuar
         messageElement.textContent = "Alias copiado automáticamente.";
         messageElement.classList.remove("error");
         messageElement.classList.add("message");
         messageElement.style.display = "block";
+        continueButton.classList.add("hidden");
+        copyButton.classList.remove("hidden");
       } else {
-        // Si no se pudo copiar automáticamente, mostrar el mensaje de error
+        // Si no se pudo copiar automáticamente, mostrar el mensaje de error y el botón de copiar manual
         messageElement.textContent = "No se pudo copiar el alias automáticamente.";
         messageElement.classList.remove("message");
         messageElement.classList.add("error");
         messageElement.style.display = "block";
-
-        // Mostrar el botón para copiar manualmente
-        copyButton.style.display = "inline-block";
+        copyButton.classList.remove("hidden");
       }
     }
-
-    // Llamar la función para intentar copiar el alias automáticamente
-    intentarCopiarAutomaticamente();
   </script>
 </body>
 </html>
